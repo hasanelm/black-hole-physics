@@ -1,0 +1,139 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{amsmath,bm}
+\usepackage{tikz} \usetikzlibrary{calc}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+
+
+
+
+\begin{document}
+
+
+
+
+
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+
+
+
+
+
+
+
+\begin{tikzpicture}
+\begin{axis}
+    [height=6cm,width=14cm,  yticklabels=\empty, xticklabels=\empty,
+    axis lines = center,
+   % grid=both,
+    minor tick num=2,
+    xlabel=$x$,ylabel=$y$,
+    samples=100,
+    domain=-8:8,
+    ]
+\end{axis}
+ %-----------axes
+   \draw[->,black!70,line width=1.pt]  (-2.3,0) --(12.5,0);
+    \draw[->,black!70,line width=1.pt]  (0,-2.3) --(0,4.5);
+% \draw[rotate=-90] (-3,4) parabola bend (0,-.5) (3,4);
+ \node (m1) at (0,0) {};
+\draw[dashed] (m1) circle (.8 and 3.5);
+\draw[fill=black!90,line width=0.5pt] (m1) circle (1.3);
+\draw[orange,line width=1.5pt] (m1) circle (1.8);
+\coordinate (1) at (10,0);
+\coordinate (2) at (0,3.51);
+\coordinate (3) at (0,-3.51);
+\coordinate (pointred1) at (0,4.1);
+\coordinate (pointred2) at (-3.5,3.7);
+\draw[dashed,very thin] (1)--(2);
+\draw[dashed,very thin] (1)--(3);
+
+%----- Light rays
+ \draw[->,red,line width=1.5pt]  (1) .. controls +(-4.9,3.5) and(pointred1) .. (pointred2);
+  \draw[orange,line width=1.5pt]  (1) .. controls +(-2.6,1.78) and(1,2.95) .. (-.45,1.75);
+   \draw[red,line width=1.5pt]  (1) .. controls +(-2.6,1.28) and(1,1.65) .. (.8,1.05);
+  
+   %----angle alpha
+\draw[thick] (9.3,0.)  pic[blue, -latex]{carc=180:120:.8cm};
+ %-----Cosmological horizon
+ \draw[thick] (8,0.35) pic(13,0){carc=-50:50:4cm};
+   
+   %--------text
+   \node[text width=1.6cm,white] at (0,0) 
+    {black hole horizon};
+     \node[text width=2cm,orange] at (-1.5,-2.3) 
+    {photon sphere};
+    \node[text width=2cm,black] at (11.5,-.3) 
+    {\bm $r_o$};
+    %------------eye
+     \node[text width=1cm,black,rotate=180] at (10.2,.0) 
+    {\Huge{$\bm \sphericalangle$}};
+    \node[text width=1cm,black,rotate=180] at (10.,.0) 
+    {$\bm \bullet$};
+    \node[text width=1cm,blue] at (8.7,.3) 
+    {$\alpha$};
+    
+    %---------Stars & galaxies
+    
+     \node[text width=1cm,red,rotate=30] at (8.,2.3) 
+    {$\bm \Game$};
+    \node[text width=1cm,red,rotate=-70] at (-2.2,2.) 
+    {$\bm \Game$};
+     \node[text width=1cm,red,rotate=-30] at (6.,-2.3) 
+    {$\bm \Game$};
+     \node[text width=1cm,red,rotate=30] at (8.,4) 
+    {$\bigstar$};
+     \node[text width=1cm,red,rotate=50] at (-2.,3.4) 
+    {$\bigstar$};
+    \node[text width=1cm,red,rotate=-50] at (-2.8,-1.4) 
+    {$\bigstar$};
+     \node[text width=1cm,red,rotate=-50] at (-2.8,-1.4) 
+    {$\bigstar$};
+      \node[text width=1cm,red,rotate=-50] at (11.2,-1.84) 
+    {$\bigstar$};
+    \node[text width=1cm,red,rotate=-50] at (11.,1.24) 
+    {$\bigstar$};
+    %-------Comment
+    
+ % \node[text width=10cm,black] at (6.5,-4.) 
+   % {Black hole shadow seen  by an observer placed  at $r_{o}$, figure used  in {\tt     Phys.Rev.D 97 (2018) 10, 104062 \&  arXiv:2005.05893}.};
+\end{tikzpicture}
+
+%.
+
+
+
+
+%%\newpage
+%
+%\tikzset{pics/.cd,
+%grid/.style args={(#1)#2(#3)#4(#5)#6(#7)#8}{code={%
+%\tikzset{pics/grid/dimensions=#8}%
+%\foreach \i in {0,...,\y}
+%  \draw [pic actions/.try] ($(#1)!\i/\y!(#7)$) -- ($(#3)!\i/\y!(#5)$);
+%\foreach \i in {0,...,\x}
+%  \draw [pic actions/.try] ($(#1)!\i/\x!(#3)$) -- ($(#7)!\i/\x!(#5)$);
+%\path (#1) coordinate (-1) (#3) coordinate (-2)
+%      (#5) coordinate (-3) (#7) coordinate (-4);
+%}},
+%grid/dimensions/.code args={#1x#2}{\def\x{#1}\def\y{#2}}}
+%
+%
+%\begin{tikzpicture}
+%\pic (A) at (0,0) [gray] {grid={(0,0) (4,-2)  (6,7) (-2,3)  18x18}};
+%\pic (B) at (7,0) [red]   {grid={(0,0) (4,0)  (4,3) (0,5)  8x8}};
+%\pic (C) at (0,7) [green] {grid={(0,0) (4,0)  (5,5) (0,3)  8x8}};
+%\pic (D) at (7,7) [blue]  {grid={(0,0) (3,-1) (4,5) (-1,3) 8x8}};
+%\end{tikzpicture}
+
+
+
+
+
+\end{document}
